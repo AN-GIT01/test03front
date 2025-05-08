@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import "./styles.css";
 import axios from "axios";
 
-const RemoveComponent = () => {
+const GetCatComponent = () => {
   // State variables to hold the input values
   const [id, setId] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [removeData, setRemoveData] = useState(null);
+  const [getData, setGetData] = useState(null);
 
   // Handler for when the Name input changes
   const handleIdChange = (event) => {
@@ -27,16 +27,16 @@ const RemoveComponent = () => {
 
       console.log(payload);
 
-      const response = await axios.delete(
-        `http://localhost:3500/cats`,
+      const response = await axios.get(
+        `http://localhost:3500/cats/${id}`,
         { data: payload}
       ); 
-      setRemoveData(response.data);
+      setGetData(response.data);
     } catch (err) {
       setError(
-        err?.response?.data?.message || err.message || "Failed to remove data"
+        err?.response?.data?.message || err.message || "Failed to get data"
       );
-      setRemoveData(null);
+      setGetData(null);
     } finally {
       setLoading(false);
     }
@@ -47,7 +47,7 @@ const RemoveComponent = () => {
     <div className="form-container">
       {" "}
       {/* Optional wrapper div for styling */}
-      <h2>Remove Cat</h2>
+      <h2>Get Cat</h2>
       {loading && <p>Loading...</p>}
       <form onSubmit={handleSubmit}>
         {/* id Field */}
@@ -63,18 +63,18 @@ const RemoveComponent = () => {
         </div>
 
         {/* Submit Button */}
-        <button type="submit">Remove (Delete)</button>
+        <button type="submit">Get Cat</button>
       </form>
       {/* Display result */}
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
-      {removeData && (
+      {getData && (
         <div>
           <h3>Received Data:</h3>
-          <pre>{JSON.stringify(removeData, null, 2)}</pre>
+          <pre>{JSON.stringify(getData, null, 2)}</pre>
         </div>
       )}
     </div>
   );
 };
 
-export default RemoveComponent;
+export default GetCatComponent;
