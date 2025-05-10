@@ -12,7 +12,9 @@ function App() {
   return (
     <>
       <div className="horizontal-container">
-        <h1>Panel?</h1>
+        <h1>Interact with Cat Express Server</h1>
+      </div>
+      <div className="horizontal-container">
         <Card>
           <LogoutComponent />
         </Card>
@@ -22,10 +24,10 @@ function App() {
       </div>
       <div className="horizontal-container">
         <Card>
-          <GetCatComponent />
+          <GetCatsComponent />
         </Card>
         <Card>
-          <GetCatsComponent />
+          <GetCatComponent />
         </Card>
       </div>
       <div className="horizontal-container">

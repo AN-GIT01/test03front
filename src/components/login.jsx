@@ -44,7 +44,7 @@ const LoginComponent = () => {
         }
       );
       setLoginData(response.data);
-      setUser({ name });
+      setUser({ name, "jwt": response.data});
     } catch (err) {
       setError(
         err?.response?.data?.message || err.message || "Failed to login data"
@@ -55,23 +55,23 @@ const LoginComponent = () => {
     }
   };
 
-  const handleTest = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await axios.get(`http://localhost:3500/test`, {
-        withCredentials: true,
-      }); // Update URL accordingly
-      setLoginData(response.data);
-    } catch (err) {
-      setError(
-        err?.response?.data?.message || err.message || "Failed test URL"
-      );
-      setLoginData(null);
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const handleTest = async () => {
+  //   setLoading(true);
+  //   setError(null);
+  //   try {
+  //     const response = await axios.get(`http://localhost:3500/test`, {
+  //       withCredentials: true,
+  //     }); // Update URL accordingly
+  //     setLoginData(response.data);
+  //   } catch (err) {
+  //     setError(
+  //       err?.response?.data?.message || err.message || "Failed test URL"
+  //     );
+  //     setLoginData(null);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   // JSX to render the form
   return (
@@ -109,9 +109,9 @@ const LoginComponent = () => {
         <button type="submit">Login User</button>
       </form>
       {/* Display result */}
-      <button onClick={handleTest}>Test</button>
+      {/* <button onClick={handleTest}>Test</button> */}
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
-      {loginData && (
+      {user?.jwt && (
         <div>
           <h3>Received Data:</h3>
           <p style={{ display: "inline-block", width: "150px" }}>
