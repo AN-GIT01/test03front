@@ -39,7 +39,13 @@ const PatchComponent = () => {
         },
       };
 
-      const response = await axios.patch(`http://localhost:3500/cats`, payload); // Update URL accordingly
+      const response = await axios.patch(
+        `http://localhost:3500/cats`,
+        payload,
+        {
+          withCredentials: true,
+        }
+      );
       setPatchData(response.data);
     } catch (err) {
       setError(
@@ -99,7 +105,6 @@ const PatchComponent = () => {
         <button type="submit">Change (Patch)</button>
       </form>
       {/* Display result */}
-
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
       {patchData && (
         <div>

@@ -32,7 +32,11 @@ const PostComponent = () => {
         },
       };
 
-      const response = await axios.post("http://localhost:3500/cats", payload); // Update URL accordingly
+      const response = await axios.post("http://localhost:3500/cats",
+         payload,
+        {
+          withCredentials: true,
+        }); 
       setPostData(response.data);
     } catch (err) {
       setError(

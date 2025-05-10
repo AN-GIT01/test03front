@@ -4,14 +4,14 @@ import axios from "axios";
 
 const GetCatComponent = () => {
   // State variables to hold the input values
-  const [id, setId] = useState("");
+  const [idCat, setIdCat] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [getData, setGetData] = useState(null);
 
   // Handler for when the Name input changes
   const handleIdChange = (event) => {
-    setId(event.target.value); // Update the name state with the input's current value
+    setIdCat(event.target.value); // Update the name state with the input's current value
   };
 
   const handleSubmit = async (event) => {
@@ -21,14 +21,14 @@ const GetCatComponent = () => {
     try {
       const payload = {
         cat: {
-          id: id
+          id: idCat
         },
       };
 
       console.log(payload);
 
       const response = await axios.get(
-        `http://localhost:3500/cats/${id}`,
+        `http://localhost:3500/cats/${idCat}`,
         { data: payload}
       ); 
       setGetData(response.data);
@@ -52,11 +52,11 @@ const GetCatComponent = () => {
       <form onSubmit={handleSubmit}>
         {/* id Field */}
         <div>
-          <label htmlFor="id">id:</label>
+          <label htmlFor="idCat">id:</label>
           <input
             type="number"
-            id="id"
-            value={id} // The input's value is controlled by the state
+            id="idCat"
+            value={idCat} // The input's value is controlled by the state
             onChange={handleIdChange} // Call the handler function when the input changes
             required // Make the field required for basic HTML validation
           />

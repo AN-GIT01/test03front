@@ -29,7 +29,11 @@ const RemoveComponent = () => {
 
       const response = await axios.delete(
         `http://localhost:3500/cats`,
-        { data: payload}
+        { 
+          data: payload,
+          withCredentials: true,
+        },
+        
       ); 
       setRemoveData(response.data);
     } catch (err) {
@@ -52,10 +56,10 @@ const RemoveComponent = () => {
       <form onSubmit={handleSubmit}>
         {/* id Field */}
         <div>
-          <label htmlFor="id">id:</label>
+          <label htmlFor="idCatRemove">id:</label>
           <input
             type="number"
-            id="id"
+            id="CatRemove"
             value={id} // The input's value is controlled by the state
             onChange={handleIdChange} // Call the handler function when the input changes
             required // Make the field required for basic HTML validation
